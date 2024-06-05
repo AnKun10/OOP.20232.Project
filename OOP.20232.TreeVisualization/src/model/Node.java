@@ -1,16 +1,17 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Node {
-    protected int value;
+    private char value;
 
-    protected ArrayList<Node> children;
-
-    Node (int value) {
+    public Node(char value) {
         this.value = value;
-        this.children = null;
     }
 
+    public char getValue() {
+        return value;
+    }
 
+    public void setValue(char value) {
+        this.value = value;
+    }
 }
