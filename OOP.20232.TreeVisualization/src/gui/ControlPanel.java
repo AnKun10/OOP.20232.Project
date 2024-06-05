@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import graph.Graph;
+import graph.DirectedGraph;
 
 public class ControlPanel extends JPanel {
     public ControlPanel() {
@@ -11,6 +13,12 @@ public class ControlPanel extends JPanel {
         JTextField nodeCountField = new JTextField(5);
         JButton generateButton = new JButton("Generate Graph");
         JButton resetButton = new JButton("Reset");
+
+        generateButton.addActionListener(e -> {
+            int numsNode = Integer.parseInt(nodeCountField.getText());
+            Graph graph = new DirectedGraph(numsNode);
+            // Now you can use this graph object in your application
+        });
 
         add(new JLabel("Graph Type:"));
         add(graphTypeBox);
