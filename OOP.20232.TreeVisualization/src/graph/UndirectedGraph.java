@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class DirectedGraph extends Graph {
-    public DirectedGraph(int numsNode) {
+public class UndirectedGraph extends Graph{
+    public UndirectedGraph(int numsNode) {
         super(numsNode);
     }
 
@@ -25,6 +25,8 @@ public class DirectedGraph extends Graph {
         for (int i = 0; i < numsNode - 1; i++) {
             edges.add(new Edge(random.nextInt(10) + 1, nodes.get(i), nodes.get(i + 1)));
             edgeSet.add(nodes.get(i).getValue() + "-" + nodes.get(i + 1).getValue());
+            edges.add(new Edge(random.nextInt(10) + 1, nodes.get(i+1), nodes.get(i)));
+            edgeSet.add(nodes.get(i + 1).getValue() + "-" + nodes.get(i).getValue());
         }
         // Add random edges
         int additionalEdges = random.nextInt(numsNode * (numsNode - 1) / 2 - (numsNode - 1) + 1);
@@ -34,6 +36,9 @@ public class DirectedGraph extends Graph {
             String edgeKey = start.getValue() + "-" + end.getValue();
             if (!start.equals(end) && !edgeSet.contains(edgeKey)) {
                 edges.add(new Edge(random.nextInt(10) + 1, start, end));
+                edgeSet.add(edgeKey);
+                edges.add(new Edge(0, end, start));
+                edgeKey = end.getValue() + "-" + start.getValue();
                 edgeSet.add(edgeKey);
             }
         }
