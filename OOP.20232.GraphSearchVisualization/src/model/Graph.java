@@ -15,6 +15,7 @@ public class Graph {
         this.numsNode = numsNode;
         this.nodes = new ArrayList<>();
         this.edges = new HashSet<>();
+        this.adjMatrix = new HashMap<>();
         generateNodes();
         initAdjMatrix();
         generateEdges();
@@ -25,6 +26,7 @@ public class Graph {
         this.maxWeight = maxWeight;
         this.nodes = new ArrayList<>();
         this.edges = new HashSet<>();
+        this.adjMatrix = new HashMap<>();
         generateNodes();
         initAdjMatrix();
         generateEdges();
@@ -38,7 +40,7 @@ public class Graph {
     }
 
 
-    public void generateNodes() {
+    private void generateNodes() {
         for (int i = 0; i < this.numsNode; i++) {
             this.nodes.add(new Node((char) ('a' + i)));
         }

@@ -33,4 +33,9 @@ public class Edge {
         Edge edge = (Edge) o;
         return nodes.equals(edge.nodes);
     }
+
+    @Override
+    public String toString() {
+        return this.nodes + " - " + this.weight;
+    }
 }
