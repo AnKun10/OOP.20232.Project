@@ -1,11 +1,10 @@
 package search;
 
 import model.Node;
-import graph.Graph;
+import model.Graph;
 import java.util.ArrayList;
 
 public class IDAStar extends Search {
-
     public IDAStar(Graph graph, Node start, Node end) {
         super(graph, start, end);
     }

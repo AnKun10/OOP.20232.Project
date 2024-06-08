@@ -1,11 +1,10 @@
 package main;
 
+import model.Graph;
 import gui.MainFrame;
 
 public class Main {
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            new MainFrame();
-        });
+        Graph graph = new Graph(5, 20);
     }
 }

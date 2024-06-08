@@ -1,6 +1,6 @@
 package search;
 
-import graph.Graph;
+import model.Graph;
 import model.Node;
 import java.util.ArrayList;
 

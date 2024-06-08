@@ -2,8 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import graph.Graph;
-import graph.DirectedGraph;
+import model.Graph;
 
 public class ControlPanel extends JPanel {
     public ControlPanel() {
@@ -16,7 +15,7 @@ public class ControlPanel extends JPanel {
 
         generateButton.addActionListener(e -> {
             int numsNode = Integer.parseInt(nodeCountField.getText());
-            Graph graph = new DirectedGraph(numsNode);
+            Graph graph = new Graph(numsNode);
             // Now you can use this graph object in your application
         });
 

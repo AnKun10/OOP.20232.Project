@@ -1,25 +1,36 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Edge {
     private int weight;
-    private Node start;
-    private Node end;
+    private Set<Node> nodes;
 
-    public Edge(int weight, Node start, Node end) {
+    public Edge(int weight, Node n1, Node n2) {
         this.weight = weight;
-        this.start = start;
-        this.end = end;
+        this.nodes = new HashSet<>();
+        this.nodes.add(n1);
+        this.nodes.add(n2);
     }
 
     public int getWeight() {
         return weight;
     }
 
-    public Node getStart() {
-        return start;
+    public Set<Node> getNodes() {
+        return nodes;
     }
 
-    public Node getEnd() {
-        return end;
+    public boolean contains(Node node) {
+        return nodes.contains(node);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge edge = (Edge) o;
+        return nodes.equals(edge.nodes);
     }
 }
