@@ -10,16 +10,23 @@ public abstract class Search {
     protected Node end;
     protected ArrayList<Node> path;
 
+    protected int totalCost;
+
     public Search(Graph graph, Node start, Node end) {
         this.graph = graph;
         this.start = start;
         this.end = end;
         this.path = new ArrayList<>();
+        this.totalCost = 0;
     }
 
     public abstract void search();
 
     public ArrayList<Node> getPath() {
         return path;
+    }
+
+    public int getTotalCost() {
+        return totalCost;
     }
 }

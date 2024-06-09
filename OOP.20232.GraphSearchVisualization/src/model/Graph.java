@@ -61,12 +61,26 @@ public class Graph {
     }
 
     private void updateNewEdge(int weight, Node n1, Node n2) {
-        if (n1.equals(n2)) {
+        Edge newEdge = new Edge(weight, n1, n2);
+        if (n1.equals(n2) || this.edges.contains(newEdge)) {
             return;
         }
         this.edges.add(new Edge(weight, n1, n2));
         this.adjMatrix.get(n1).set(this.nodes.indexOf(n2), true);
         this.adjMatrix.get(n2).set(this.nodes.indexOf(n1), true);
+    }
+
+    public HashSet<Edge> getAdjEdges(Node node) {
+        if (!this.adjMatrix.containsKey(node)) {
+            return null;
+        }
+        HashSet<Edge> adjEdges = new HashSet<>();
+        for (Edge edge : this.edges) {
+            if (edge.contains(node)) {
+                adjEdges.add(edge);
+            }
+        }
+        return adjEdges;
     }
 
     public ArrayList<Node> getNodes() {
