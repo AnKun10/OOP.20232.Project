@@ -62,8 +62,13 @@ public class Graph {
 
     private void updateNewEdge(int weight, Node n1, Node n2) {
         Edge newEdge = new Edge(weight, n1, n2);
-        if (n1.equals(n2) || this.edges.contains(newEdge)) {
+        if (n1.equals(n2)) {
             return;
+        }
+        for (Edge edge : edges) {
+            if (edge.equals(newEdge)) {
+                return;
+            }
         }
         this.edges.add(new Edge(weight, n1, n2));
         this.adjMatrix.get(n1).set(this.nodes.indexOf(n2), true);
