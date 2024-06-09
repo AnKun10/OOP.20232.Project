@@ -1,22 +1,21 @@
 package search;
 
 import model.Edge;
-import model.Node;
 import model.Graph;
+import model.Node;
 
 import java.util.*;
 
-public class BFS extends Search {
-
+public class Dijkstra extends Search{
     private Set<Node> visitedNodes;
-    private Queue<Node> traversalNodes;
+    private PriorityQueue<Node> traversalNodes;
     private Map<Node, Node> predecessors;
     private Map<Node, Integer> distances;
 
-    public BFS(Graph graph, Node start, Node end) {
+    public Dijkstra(Graph graph, Node start, Node end) {
         super(graph, start, end);
         this.visitedNodes = new HashSet<>();
-        this.traversalNodes = new LinkedList<>();
+        this.traversalNodes = new PriorityQueue<>(Comparator.comparingInt(distances::get));
         this.predecessors = new HashMap<>();
         this.distances = new HashMap<>();
     }
@@ -30,10 +29,19 @@ public class BFS extends Search {
         distances.put(start, 0);
 
         traversalNodes.add(start);
-        visitedNodes.add(start);
 
         while (!traversalNodes.isEmpty()) {
             Node current = traversalNodes.poll();
+
+            // Stop if we reach the end node
+            if (current.equals(end)) {
+                updatePath();
+                return;
+            }
+
+            if (!visitedNodes.add(current)) {
+                continue;
+            }
 
             // Traverse all adjacent nodes
             HashSet<Edge> adjEdges = graph.getAdjEdges(current);
@@ -41,32 +49,23 @@ public class BFS extends Search {
                 Node neighbor = edge.getLinkedNode(current);
                 int newDist = distances.get(current) + edge.getWeight();
 
-                if (!visitedNodes.contains(neighbor)) {
-                    visitedNodes.add(neighbor);
+                if (newDist < distances.get(neighbor)) {
+                    distances.put(neighbor, newDist);
+                    predecessors.put(neighbor, current);
                     traversalNodes.add(neighbor);
-                    distances.put(neighbor, newDist);
-                    predecessors.put(neighbor, current);
-                } else if (newDist < distances.get(neighbor)) {
-                    distances.put(neighbor, newDist);
-                    predecessors.put(neighbor, current);
-                }
-
-                // If we reached the end node
-                if (neighbor.equals(end)) {
-                    updatePath();
-                    return;
                 }
             }
         }
 
-
         System.out.println("End node not reachable from start node");
     }
 
-    private void updatePath() {
+    @Override
+    protected void updatePath() {
         Node step = end;
 
         if (predecessors.get(step) == null) {
+            System.out.println("No path found");
             return;
         }
 

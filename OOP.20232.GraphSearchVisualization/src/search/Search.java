@@ -20,7 +20,8 @@ public abstract class Search {
         this.totalCost = 0;
     }
 
-    public abstract void search();
+    protected abstract void search();
+    protected abstract void updatePath();
 
     public ArrayList<Node> getPath() {
         return path;
