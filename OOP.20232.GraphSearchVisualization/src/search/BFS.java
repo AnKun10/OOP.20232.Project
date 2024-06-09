@@ -50,10 +50,33 @@ public class BFS extends Search {
                     distances.put(neighbor, newDist);
                     predecessors.put(neighbor, current);
                 }
+
+                // If we reached the end node
+                if (neighbor.equals(end)) {
+                    updatePath();
+                    return;
+                }
             }
         }
 
 
         System.out.println("End node not reachable from start node");
+    }
+
+    private void updatePath() {
+        Node step = end;
+
+        if (predecessors.get(step) == null) {
+            return;
+        }
+
+        path.add(step);
+        while (predecessors.get(step) != null) {
+            step = predecessors.get(step);
+            path.add(step);
+        }
+
+        Collections.reverse(path);
+        totalCost = distances.get(end);
     }
 }
