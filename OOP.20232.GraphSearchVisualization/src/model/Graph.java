@@ -38,7 +38,14 @@ public class Graph {
             adjMatrix.put(node, adjList);
         }
     }
-
+    public Node getNodeByName(String name) {
+        for (Node node : nodes) {
+            if (String.valueOf(node.getValue()).equals(name)) {
+                return node;
+            }
+        }
+        return null;
+    }
 
     private void generateNodes() {
         for (int i = 0; i < this.numsNode; i++) {

@@ -14,6 +14,7 @@ public class Main {
         Graph graph = new Graph(5,5);
         System.out.println(graph.getAdjMatrix());
         System.out.println(graph.getEdges());
+
         Dijkstra dijkstra = new Dijkstra(graph, graph.getNodes().get(0), graph.getNodes().get(4));
         dijkstra.search();
 
@@ -29,6 +30,7 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println(dijkstra.getNeighborsPerStep());
     }
 }
 //adjmatrix: dict

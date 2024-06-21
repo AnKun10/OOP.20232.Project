@@ -14,6 +14,8 @@ public class Dijkstra extends Search {
     private Map<Node, Integer> distances;
     private List<Map<String, String>> steps; // To store each step's state
 
+    private List<String> listCurrentKey = new ArrayList<>(); // To store current node (cur) at each step
+
     private Map<Node, Set<Node>> neighborsPerStep;
 
     public Dijkstra(Graph graph, Node start, Node end) {
@@ -38,7 +40,9 @@ public class Dijkstra extends Search {
 
         while (!traversalNodes.isEmpty()) {
             Node current = traversalNodes.poll();
+            listCurrentKey.add(String.valueOf(current.getValue()));
             traversedNodes.add(current);
+            System.out.println(current);
 
             // Stop if we reach the end node
             if (current.equals(end)) {
@@ -118,6 +122,10 @@ public class Dijkstra extends Search {
 
     public List<Map<String, String>> getSteps() {
         return steps;
+    }
+
+    public List<String> getListCurrentKey() {
+        return listCurrentKey;
     }
 
     public Map<Node, Set<Node>> getNeighborsPerStep() {
