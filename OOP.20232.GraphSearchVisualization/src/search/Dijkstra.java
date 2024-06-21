@@ -3,7 +3,6 @@ package search;
 import model.Edge;
 import model.Graph;
 import model.Node;
-import screen.TraversalController;
 
 import java.util.*;
 
