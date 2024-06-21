@@ -88,6 +88,17 @@ public class Graph {
         return adjEdges;
     }
 
+    public Edge findEdge(Node n1, Node n2) {
+        Edge target = new Edge(0, n1, n2);
+        for (Edge edge :
+                edges) {
+            if (edge.equals(target)) {
+                return edge;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Node> getNodes() {
         return nodes;
     }

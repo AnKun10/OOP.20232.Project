@@ -14,12 +14,15 @@ public class Dijkstra extends Search {
     private Map<Node, Integer> distances;
     private List<Map<String, String>> steps; // To store each step's state
 
+    private Map<Node, Set<Node>> neighborsPerStep;
+
     public Dijkstra(Graph graph, Node start, Node end) {
         super(graph, start, end);
         this.visitedNodes = new HashSet<>();
         this.predecessors = new HashMap<>();
         this.distances = new HashMap<>();
         this.steps = new ArrayList<>();
+        this.neighborsPerStep = new HashMap<>();
         this.traversalNodes = new PriorityQueue<>(Comparator.comparingInt(node -> distances.getOrDefault(node, Integer.MAX_VALUE)));
     }
 
@@ -49,10 +52,10 @@ public class Dijkstra extends Search {
             }
 
             // Traverse all adjacent nodes
-            HashSet<Edge> adjEdges = graph.getAdjEdges(current);
-            for (Edge edge : adjEdges) {
-                Node neighbor = edge.getLinkedNode(current);
-                int newDist = distances.get(current) + edge.getWeight();
+            updateNeighborsPerStep(current);
+            Set<Node> neighborNodes = neighborsPerStep.get(current);
+            for (Node neighbor : neighborNodes) {
+                int newDist = distances.get(current) + graph.findEdge(current, neighbor).getWeight();
 
                 if (newDist < distances.get(neighbor)) {
                     distances.put(neighbor, newDist);
@@ -96,11 +99,28 @@ public class Dijkstra extends Search {
         totalCost = distances.get(end);
     }
 
+    private void updateNeighborsPerStep(Node cur) {
+        HashSet<Edge> adjEdges = graph.getAdjEdges(cur);
+        Set<Node> neighbors = new HashSet<>();
+        for (Edge edge : adjEdges) {
+            Node neighbor = edge.getLinkedNode(cur);
+            if (visitedNodes.contains(neighbor)) {
+                continue;
+            }
+            neighbors.add(neighbor);
+        }
+        neighborsPerStep.put(cur, neighbors);
+    }
+
     public List<Node> getTraversedNodes() {
         return traversedNodes;
     }
 
     public List<Map<String, String>> getSteps() {
         return steps;
+    }
+
+    public Map<Node, Set<Node>> getNeighborsPerStep() {
+        return neighborsPerStep;
     }
 }
