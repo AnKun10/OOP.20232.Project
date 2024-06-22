@@ -62,7 +62,7 @@ public class Graph {
         // Add random edges
         int bound = ((this.numsNode*this.numsNode)-3*this.numsNode+2)/2;
         int additionalEdges = random.nextInt(bound);
-        for (int i = 0; i < additionalEdges; i++) {
+        for (int i = 0; i < additionalEdges + 1; i++) {
             updateNewEdge(random.nextInt(this.maxWeight), this.nodes.get(random.nextInt(this.numsNode)), this.nodes.get(random.nextInt(this.numsNode)));
         }
     }
